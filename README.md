@@ -53,12 +53,30 @@ In column F we need to get the payment amount from the BPAY sheet, but I  notice
 
 =VALUE(SUBSTITUTE(PAYMENT AMOUNT,"AU$",""))
 
+
+<img width="582" alt="AEEC0F8F-7E40-42B1-BADB-81604B6FD5F8" src="https://user-images.githubusercontent.com/127425854/230955850-a4bc787a-156f-432d-88f9-e5ef5e618d1c.png">
+
 ## Balance 
 
 For calculating the balance for each student we should come back to the SYS DATA sheet and sum amount based on Customer Ref Column. To do so, by RIGHT function we earlier took the 5 digits of BPAY Reference column from BPAY Bank Sheet in column C which is equal to Customer Ref in the SYS DATA. Then by SUMIFS function sum Amount based on Customer Ref.
 
 =SUMIFS(Amount,Cust_Ref,C2)
 - Amount and Cust_Ref were already named by named range 
+
+
+<img width="660" alt="2DE5334A-32F7-4535-A249-91C6238C0388" src="https://user-images.githubusercontent.com/127425854/230956177-17b1f92f-4161-4d12-80ea-79fcd01e670f.png">
+
+
+<img width="582" alt="9D644744-4D5C-44C7-948E-2CB0052DEEC1" src="https://user-images.githubusercontent.com/127425854/230956378-b5429907-5bc2-427f-9c2b-b31dd6b8f1b1.png">
+
+## Invoice Date 
+
+In column H I used the Customer Reference to look up the invoice date for that customer from the data in the SYS DATA sheet.
+
+=VLOOKUP(Cust_Ref,SysData,2,0)
+
+
+<img width="582" alt="0D94101E-5CAC-41AF-9868-7EE52EAA5550" src="https://user-images.githubusercontent.com/127425854/230957062-e5846a10-7acf-4684-8af1-5afb8fde93e0.png">
 
 
 
