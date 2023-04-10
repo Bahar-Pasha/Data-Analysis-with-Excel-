@@ -79,6 +79,22 @@ In column H I used the Customer Reference to look up the invoice date for that c
 <img width="582" alt="0D94101E-5CAC-41AF-9868-7EE52EAA5550" src="https://user-images.githubusercontent.com/127425854/230957062-e5846a10-7acf-4684-8af1-5afb8fde93e0.png">
 
 
+## Due Date 
+
+The due date for invoices is 21 working days after invoices are issued. I used WORKDAY function to calculate this part. 
+
+=WORKDAY(Invoice Date ,21)
+
+Then, In column "Days to Pay", I calculated the difference between the invoice date and paied date to estimate how many days does it take  an invoice to be paid. By using DAYS function the difference has been calculated. 
+
+=DAYS(Paid Date,Invoice Date)
+
+<img width="641" alt="E52072E8-AA36-409C-A36D-B15B7664B44C" src="https://user-images.githubusercontent.com/127425854/230962424-afed8441-093b-4c72-9270-d3a9935a6e3d.png">
+
+
+
+
+
 
 
 
