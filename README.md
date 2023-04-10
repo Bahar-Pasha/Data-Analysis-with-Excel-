@@ -37,6 +37,17 @@ In the BPAY sheet dates come through in the format YYYYMMDD, which makes them di
 
 <img width="377" alt="B0B33A3E-ED38-4F5D-831C-DEB0A1614B8B" src="https://user-images.githubusercontent.com/127425854/230916940-b4d2b7c0-de98-4ff9-8fe6-b42a86cb12ed.png">
 
+## Valid Format Date 
+In column E, we shoud use a calculation to convert the paid date in the BPAY sheet to a valid Excel date.I need to separate and rejoin the separate parts of the date using an appropriate date function. Through LEFT, MID and RIGHT I seprately calculate Year, Month and Day then put all of them in DATE function to create a formate date. 
+=DATE(LEFT(PAYMENT DATE,4),MID(PAYMENT DATE,5,2),RIGHT(PAYMENT DATE!G18,2))
+
+
+## Payment Amount 
+
+In column F we need to get the payment amount from the BPAY sheet, but I  noticed it is being treated as text because of the "AU" at the front.Therefore, we should remove AU by SUBSTITUTE then trun it into numeric format. 
+
+
+=VALUE(SUBSTITUTE(PAYMENT AMOUNT,"AU$",""))
 
 
 
