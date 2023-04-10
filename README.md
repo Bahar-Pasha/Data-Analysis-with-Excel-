@@ -92,6 +92,12 @@ Then, In column "Days to Pay", I calculated the difference between the invoice d
 <img width="641" alt="E52072E8-AA36-409C-A36D-B15B7664B44C" src="https://user-images.githubusercontent.com/127425854/230962424-afed8441-093b-4c72-9270-d3a9935a6e3d.png">
 
 
+## Paied before Due Date 
+
+The due date for invoices is 21 working days after invoices are issued.In this stage ,we would like to know who paied earlier than Due Date. We need this data for giving discounts to people who pay early. Therefore, by using IF function I retunr the required data by showing "Y" if paied early and "" or nothing who paied late. 
+
+=IF(Paied Date >Invoice Date,"Y","")
+
 
 
 
