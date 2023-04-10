@@ -39,7 +39,11 @@ In the BPAY sheet dates come through in the format YYYYMMDD, which makes them di
 
 ## Valid Format Date 
 In column E, we shoud use a calculation to convert the paid date in the BPAY sheet to a valid Excel date.I need to separate and rejoin the separate parts of the date using an appropriate date function. Through LEFT, MID and RIGHT I seprately calculate Year, Month and Day then put all of them in DATE function to create a formate date. 
+
 =DATE(LEFT(PAYMENT DATE,4),MID(PAYMENT DATE,5,2),RIGHT(PAYMENT DATE!G18,2))
+
+
+<img width="596" alt="30575F77-0151-4101-BA68-FE04BC5B4F63" src="https://user-images.githubusercontent.com/127425854/230941123-0531ca29-bada-47a0-9f4c-61e8300fc06f.png">
 
 
 ## Payment Amount 
@@ -48,6 +52,16 @@ In column F we need to get the payment amount from the BPAY sheet, but I  notice
 
 
 =VALUE(SUBSTITUTE(PAYMENT AMOUNT,"AU$",""))
+
+## Balance 
+
+For calculating the balance for each student we should come back to the SYS DATA sheet and sum amount based on Customer Ref Column. To do so, by RIGHT function we earlier took the 5 digits of BPAY Reference column from BPAY Bank Sheet in column C which is equal to Customer Ref in the SYS DATA. Then by SUMIFS function sum Amount based on Customer Ref.
+
+=SUMIFS(Amount,Cust_Ref,C2)
+- Amount and Cust_Ref were already named by named range 
+
+
+
 
 
 
