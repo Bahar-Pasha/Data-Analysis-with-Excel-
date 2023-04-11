@@ -12,6 +12,7 @@ One of the widley-used tools for data analysis is excel.I have been asked by a s
 ## Join Texts 
  1- The first phase of this porjoect is joing texts from BPAY Bank sheet (column:MERCHANT,SETTLEMENT DATE,MERCHANT REFERENCE)to create Transaction Reference with no space between them. We can do this by 4 different ways or different formula: 1- CONCATENATE 2- CONCAT 3- TEXTJOIN 4-&
 Idid:
+
 =CONCAT(MERCHANT,SETTLEMENT DATE,MERCHANT REFERENCE)
 
 <img width="620" alt="844D4BDF-E94C-45D4-AE5B-D46C5DC121AB" src="https://user-images.githubusercontent.com/127425854/230916450-3e8c587c-420e-4b70-baef-808ecb196d24.png">
@@ -21,7 +22,9 @@ Idid:
 2- For Customer Ref which is column C in Upload sheet we should create a calculation to extract the last 5 characters from the BPAY Reference (from BPAY Bank sheet) and convert it to a numeric value. There was a space at the end of the code in BPAY Reference so I used TRIM to get ride of any space before and after the code, then I got the 5 last characters by RIGHT and turned it into number since the format was text. 
 
 =VALUE(RIGHT(TRIM(BPAY Reference),5))
+
 Instead of TRIM we could use: 
+
 =VALUE(RIGHT(SUBSTITUTE(PAY Reference," ",""),5))
 
 
@@ -32,6 +35,7 @@ Instead of TRIM we could use:
 
 ## Paid Month
 In the BPAY sheet dates come through in the format YYYYMMDD, which makes them difficult to perform calculations with.In column D a calculation was created to extract the two digit month from PAYMENT DATE in the BPAY sheet. This calculation was done through MID. 
+
 =MID(PAYMENT DATE,5,2)
 
 
@@ -61,6 +65,7 @@ In column F we need to get the payment amount from the BPAY sheet, but I  notice
 For calculating the balance for each student we should come back to the SYS DATA sheet and sum amount based on Customer Ref Column. To do so, by RIGHT function we earlier took the 5 digits of BPAY Reference column from BPAY Bank Sheet in column C which is equal to Customer Ref in the SYS DATA. Then by SUMIFS function sum Amount based on Customer Ref.
 
 =SUMIFS(Amount,Cust_Ref,C2)
+
 - Amount and Cust_Ref were already named by named range 
 
 
@@ -94,14 +99,26 @@ Then, In column "Days to Pay", I calculated the difference between the invoice d
 
 ## Paied before Due Date 
 
-The due date for invoices is 21 working days after invoices are issued.In this stage ,we would like to know who paied earlier than Due Date. We need this data for giving discounts to people who pay early. Therefore, by using IF function I retunr the required data by showing "Y" if paied early and "" or nothing who paied late. 
+The due date for invoices is 21 working days after invoices are issued.In this stage ,we would like to know who paied earlier than Due Date. We need this data for giving discounts to people who paied early. Therefore, by using IF function the required data by showing "Y" if paied early and ""  who paied late was returned. 
 
 =IF(Paied Date >Invoice Date,"Y","")
 
+Next, I am going to calculate how many days people pay early except working days. I got the answer with NETWORKDAYS and IF, also people who pay late 0 day should return:
+
+=IF([@[Paid before Due Date]]="Y",NETWORKDAYS([@[Paid Date]],[@[Due Date]]),0)
 
 
+<img width="756" alt="432E4907-C223-45F4-94DC-4D3AD89B8C08" src="https://user-images.githubusercontent.com/127425854/231073123-4c32768d-6d79-47a3-9b18-5a4018cffab4.png">
+
+## Discounts 
+Customers who pay 5 working days before the due date are eligible for a discount. In column M we should calculate the date 5 working days before the due date (excludes Saturdays and Sundays).
+
+=WORKDAY([@[Due Date]],-5)
+
+Discounts are calculated as a percentage of the balance owed, rates vary depending on how large the balance is based on the following table:
 
 
+Now,based on this table we should calculate how much discount are going to be offered to each people based on their balance owed. 
 
 
 
